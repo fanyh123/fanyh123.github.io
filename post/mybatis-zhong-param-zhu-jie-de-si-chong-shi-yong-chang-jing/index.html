@@ -4,9 +4,9 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MyBatis 中 @Param 注解的四种使用场景 | GeekNotes</title>
-<link rel="shortcut icon" href="https://fanyh123.github.io//favicon.ico?v=1564048793379">
+<link rel="shortcut icon" href="http://note.geekju.cn//favicon.ico?v=1564059170675">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://fanyh123.github.io//styles/main.css">
+<link rel="stylesheet" href="http://note.geekju.cn//styles/main.css">
 
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 <script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
@@ -17,8 +17,8 @@
     <div class="main">
       <div class="main-content">
         <div class="site-header">
-  <a href="https://fanyh123.github.io/">
-  <img class="avatar" src="https://fanyh123.github.io//images/avatar.png?v=1564048793379" alt="">
+  <a href="http://note.geekju.cn/">
+  <img class="avatar" src="http://note.geekju.cn//images/avatar.png?v=1564059170675" alt="">
   </a>
   <h1 class="site-title">
     GeekNotes
@@ -79,11 +79,14 @@
                 · 2019-07-25 ·
               </time>
               
-                <a href="https://fanyh123.github.io//tag/MH8alIhJ5" class="post-tags">
+                <a href="http://note.geekju.cn//tag/MH8alIhJ5" class="post-tags">
                   # Mybits
                 </a>
               
             </div>
+            
+              <div class="post-feature-image" style="background-image: url('http://qiniu.geekju.cn/geekNotes/jpg/images.jpeg')">
+              </div>
             
             <div class="post-content">
               <ul>
@@ -133,7 +136,7 @@ public interface UserMapper {
 &lt;/select&gt;
 </code></pre>
 <ul>
-<li>第四种:那就是动态 SQL ，如果在动态 SQL 中使用了参数作为变量，那么也需要 @Param 注解，即使你只有一个参数。
+<li>第四种:那就是动态 SQL ，也是我在工作中踩过的坑如果在动态 SQL 中使用了参数作为变量，那么也需要 @Param 注解，即使你只有一个参数。
 如果我们在动态 SQL 中用到了 参数作为判断条件，那么也是一定要加 @Param 注解的，例如如下方法：</li>
 </ul>
 <pre><code>@Mapper
@@ -158,7 +161,7 @@ public interface UserMapper {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://fanyh123.github.io//post/hello-gridea">
+            <a href="http://note.geekju.cn//post/hello-gridea">
               <h3 class="post-title">
                 Hello Gridea
               </h3>

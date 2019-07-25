@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://fanyh123.github.io/</id>
+    <id>http://note.geekju.cn/</id>
     <title>GeekNotes</title>
-    <updated>2019-07-25T09:59:56.791Z</updated>
+    <updated>2019-07-25T12:52:53.823Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://fanyh123.github.io/"/>
-    <link rel="self" href="https://fanyh123.github.io//atom.xml"/>
+    <link rel="alternate" href="http://note.geekju.cn/"/>
+    <link rel="self" href="http://note.geekju.cn//atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://fanyh123.github.io//images/avatar.png</logo>
-    <icon>https://fanyh123.github.io//favicon.ico</icon>
+    <logo>http://note.geekju.cn//images/avatar.png</logo>
+    <icon>http://note.geekju.cn//favicon.ico</icon>
     <rights>All rights reserved 2019, GeekNotes</rights>
     <entry>
         <title type="html"><![CDATA[MyBatis 中 @Param 注解的四种使用场景]]></title>
-        <id>https://fanyh123.github.io//post/mybatis-zhong-param-zhu-jie-de-si-chong-shi-yong-chang-jing</id>
-        <link href="https://fanyh123.github.io//post/mybatis-zhong-param-zhu-jie-de-si-chong-shi-yong-chang-jing">
+        <id>http://note.geekju.cn//post/mybatis-zhong-param-zhu-jie-de-si-chong-shi-yong-chang-jing</id>
+        <link href="http://note.geekju.cn//post/mybatis-zhong-param-zhu-jie-de-si-chong-shi-yong-chang-jing">
         </link>
         <updated>2019-07-25T09:50:43.000Z</updated>
         <content type="html"><![CDATA[<ul>
@@ -63,7 +63,7 @@ public interface UserMapper {
 &lt;/select&gt;
 </code></pre>
 <ul>
-<li>第四种:那就是动态 SQL ，如果在动态 SQL 中使用了参数作为变量，那么也需要 @Param 注解，即使你只有一个参数。
+<li>第四种:那就是动态 SQL ，也是我在工作中踩过的坑如果在动态 SQL 中使用了参数作为变量，那么也需要 @Param 注解，即使你只有一个参数。
 如果我们在动态 SQL 中用到了 参数作为判断条件，那么也是一定要加 @Param 注解的，例如如下方法：</li>
 </ul>
 <pre><code>@Mapper
@@ -84,8 +84,8 @@ public interface UserMapper {
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://fanyh123.github.io//post/hello-gridea</id>
-        <link href="https://fanyh123.github.io//post/hello-gridea">
+        <id>http://note.geekju.cn//post/hello-gridea</id>
+        <link href="http://note.geekju.cn//post/hello-gridea">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
