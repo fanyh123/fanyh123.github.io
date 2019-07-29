@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MyBatis 中 @Param 注解的四种使用场景 | GeekNotes</title>
-<link rel="shortcut icon" href="http://note.geekju.cn//favicon.ico?v=1564059170675">
+<link rel="shortcut icon" href="http://note.geekju.cn//favicon.ico?v=1564371100978">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="http://note.geekju.cn//styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="http://note.geekju.cn/">
-  <img class="avatar" src="http://note.geekju.cn//images/avatar.png?v=1564059170675" alt="">
+  <img class="avatar" src="http://note.geekju.cn//images/avatar.png?v=1564371100978" alt="">
   </a>
   <h1 class="site-title">
     GeekNotes
@@ -104,7 +104,7 @@ public interface UserMapper {
 </code></pre>
 <p>这是最常见的需要添加 @Param 注解的场景。</p>
 <ul>
-<li>第二种：方法参数要取别名，需要 @Param 注解
+<li>第二种：方法参数要取别名，需要 @Param 注解<br>
 当需要给参数取一个别名的时候，我们也需要 @Param 注解，例如方法定义如下：</li>
 </ul>
 <pre><code>@Mapper
@@ -119,7 +119,7 @@ public interface UserMapper {
 </code></pre>
 <p>这种需求不多</p>
 <ul>
-<li>第三种：XML 中的 SQL 使用了 $ ，那么参数中也需要 @Param 注解
+<li>第三种：XML 中的 SQL 使用了 $ ，那么参数中也需要 @Param 注解<br>
 <strong>会有注入漏洞的问题，但是有的时候你不得不使用 符号</strong>，例如要传入列名或者表名的时候，这个时候必须要添加 @Param 注解，例如：</li>
 </ul>
 <pre><code>@Mapper
@@ -136,7 +136,7 @@ public interface UserMapper {
 &lt;/select&gt;
 </code></pre>
 <ul>
-<li>第四种:那就是动态 SQL ，也是我在工作中踩过的坑如果在动态 SQL 中使用了参数作为变量，那么也需要 @Param 注解，即使你只有一个参数。
+<li>第四种:那就是动态 SQL ，也是我在工作中踩过的坑如果在动态 SQL 中使用了参数作为变量，那么也需要 @Param 注解，即使你只有一个参数。<br>
 如果我们在动态 SQL 中用到了 参数作为判断条件，那么也是一定要加 @Param 注解的，例如如下方法：</li>
 </ul>
 <pre><code>@Mapper
@@ -161,9 +161,9 @@ public interface UserMapper {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="http://note.geekju.cn//post/hello-gridea">
+            <a href="http://note.geekju.cn//post/pei-zhi-frp-shi-xian-nei-wang-chuan-tou">
               <h3 class="post-title">
-                Hello Gridea
+                配置frp实现内网穿透
               </h3>
             </a>
           </div>  
