@@ -1,0 +1,217 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aml(伪派)操作记录--docker实现更多功能 | GeekNotes</title>
+<link rel="shortcut icon" href="http://note.geekju.cn//favicon.ico?v=1565705918796">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="http://note.geekju.cn//styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="http://note.geekju.cn/">
+  <img class="avatar" src="http://note.geekju.cn//images/avatar.png?v=1565705918796" alt="">
+  </a>
+  <h1 class="site-title">
+    GeekNotes
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Aml(伪派)操作记录--docker实现更多功能
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-06-06 ·
+              </time>
+              
+                <a href="http://note.geekju.cn//tag/9r6f64UCe" class="post-tags">
+                  # linux初级玩法
+                </a>
+              
+            </div>
+            
+              <div class="post-feature-image" style="background-image: url('http://h1.ioliu.cn/bing/LinyantiLeopard_ZH-CN9934758728_1920x1080.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <h3 id="mysql部署方式">Mysql部署方式</h3>
+<pre><code>docker run -it -e 'MYSQL_ROOT_PASSWORD=mq1129'  -e 'MYSQL_DATABASE=fff' -e 'MYSQL_USER=fff' -e 'MYSQL_PASSWORD=ff1129' -p '33006:3306' --name example_mysql
+ beercan1989/arm-mysql:lates
+</code></pre>
+<h3 id="aria2-uifilesmanager部署">Aria2-ui+filesManager部署</h3>
+<pre><code>docker run -d --name aria2-ui -p 680:80 -p 6880:6800 -v /mnt/usb:/data wahyd4/aria2-ui:arm64
+</code></pre>
+<h3 id="leanote-nodb部署方式">Leanote nodb部署方式</h3>
+<ol>
+<li>部署无db版leanote</li>
+</ol>
+<pre><code>docker run -d --name leanote -p 10086:9000  --restart=always -v /root/dockerAppData/leanote:/data/leanote/conf  axboy/leanote:nodb-arm
+</code></pre>
+<ol start="2">
+<li>单独部署数据库</li>
+</ol>
+<blockquote>
+<p>mongodb</p>
+</blockquote>
+<pre><code>docker run -p 27017:27017 --restart=always  --name mongo -v /root/dockerAppData/mongo:/data/db  arm64v8/mongo  --smallfiles
+</code></pre>
+<p><em>参考</em><br>
+https://www.imooc.com/article/49225<br>
+https://github.com/leanote/leanote/wiki/Leanote-%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%89%88%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B----Mac-and-Linux#3-%E5%AF%BC%E5%85%A5%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE</p>
+<h3 id="plex-部署方式bridge">Plex 部署方式(bridge)</h3>
+<pre><code>docker run --name=plex -p 32400:32400/tcp -p 3005:3005/tcp -p 8324:8324/tcp -p 32469:32469/tcp -p 1900:1900/udp -p 32410:32410/udp -p 32412:32412/udp -p 32413:32413/udp -p 32414:32414/udp  -e PUID=0 -e PGID=0 -e VERSION=docker -e TZ=&quot;Asia/Shanghai&quot; -e ALLOWED_NETWORKS=&quot;192.168.2.0/24&quot; -h PlexDocker -v  /root/dockerAppData/plex:/config -v /mnt/usb/Movies:/data/tvshows -v /mnt/usb/Movies:/data/movies -v /root/dockerAppData/plex/transcode:/transcode --restart=always linuxserver/plex:arm64v8-latest
+</code></pre>
+<ul>
+<li>运行成功修改</li>
+</ul>
+<pre><code>/root/dockerAppData/plex/Library/Application Support/Plex Media Server/Preferences.xml . 添加 allowedNetworks=&quot;192.168.2.0/24&quot;
+</code></pre>
+<p>--https://github.com/plexinc/pms-docker</p>
+<h3 id="portainer">Portainer</h3>
+<pre><code>docker run -d -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock  --name portainer portainer/portainer
+</code></pre>
+<h3 id="docker-gateway旁路ssr">docker-gateway旁路（ssr）</h3>
+<pre><code>docker run --restart always -d --name gateway --network macnet --ip 192.168.2.2 --privileged -v /root/dockerAppData/gateway:/root bettermanbao/docker-gateway:aarch64-0.0.2
+</code></pre>
+<h3 id="迅雷离线">迅雷离线</h3>
+<pre><code>docker run --name xware -v /mnt/usb/Downloads/xunleiDownloads:/data -d v8ok/n1-docker-xware
+</code></pre>
+<h3 id="heimdal部署">Heimdal部署</h3>
+<pre><code>docker run --name heimdal -e PUID=1000 -e PGID=1000 -e TZ=Asia/Shanghai -p 880:80 -p 8443:443 -v /root/dockerAppData/heimdal:/config --restart=always linuxserver/heimdall:arm64v8-latest
+</code></pre>
+<h3 id="gogs部署">Gogs部署</h3>
+<pre><code>docker run --name=gogs -p 10022:22 -p 10080:3000 -v /root/dockerAppData/gogs:/data autarchprinceps/gogs-arm64:latest
+</code></pre>
+<h3 id="openwrtgateway">openwrtgateway</h3>
+<pre><code>docker run --restart always -d --network macnet --privileged kanshudj/n1-openwrtgateway /sbin/init
+</code></pre>
+<p>--https://hub.docker.com/r/kanshudj/n1-openwrtgateway</p>
+<h3 id="netdata">netdata</h3>
+<pre><code>docker run -d --name=netdata --restart unless-stopped  -p 19999:19999 -v /proc:/host/proc:ro -v /sys:/host/sys:ro -v /var/run/docker.sock:/var/run/docker.sock:ro --cap-add SYS_PTRACE --security-opt apparmor=unconfined netdata/netdata:lastst-aarch64
+</code></pre>
+<h3 id="nextcloud">nextCloud</h3>
+<pre><code>docker run -it -p 5555:80 --name nextcloud -v /media:/var/www/html/data/ -v /mnt:/mnt --restart=always --privileged=true  arm64v8/nextcloud
+</code></pre>
+<blockquote>
+<p>/etc/fstab里添加这句</p>
+</blockquote>
+<pre><code>/dev/sda1	/mnt		ntfs		defaults,noatime,nofail	    0 2
+</code></pre>
+<blockquote>
+<p>这句是把外挂盘映射到docker里的 /mnt<br>
+大致过程就是先fstab把移动硬盘先挂载到宿主机的/mnt，然后上面截图的语句把宿主的/mnt 挂载到 docker的 /mnt，这样就实现docker访问移动硬盘内容了</p>
+</blockquote>
+<h3 id="baidupcs-web">baidupcs-web</h3>
+<pre><code>docker run -d --name baidupcs -p 5299:5299 -v /your/downloads:/downloads -v /your/config:/root/.config/BaiduPCS-Go 80x86/baidupcs:arm64-latest
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="http://note.geekju.cn//post/amlwei-pai-cao-zuo-ji-lu-xiao-xing-nas">
+              <h3 class="post-title">
+                Aml(伪派)操作记录--小型nas
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '5b0e6deb001499367e1d',
+    clientSecret: '717dc9f810d8515abfaad5a8f9f0d3596e10f8de',
+    repo: 'fanyh123.github.io',
+    owner: 'fanyh123',
+    admin: ['fanyh123'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
