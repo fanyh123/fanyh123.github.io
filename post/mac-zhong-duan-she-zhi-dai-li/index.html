@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Aml(伪派)操作记录--小型nas | GeekNotes</title>
+<title>Mac终端设置代理 | GeekNotes</title>
 <link rel="shortcut icon" href="http://note.geekju.cn//favicon.ico?v=1566892547008">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="http://note.geekju.cn//styles/main.css">
@@ -72,39 +72,44 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Aml(伪派)操作记录--小型nas
+              Mac终端设置代理
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2019-05-30 ·
+                · 2019-08-27 ·
               </time>
-              
-                <a href="http://note.geekju.cn//tag/9r6f64UCe" class="post-tags">
-                  # linux初级玩法
-                </a>
               
             </div>
             
-              <div class="post-feature-image" style="background-image: url('http://h1.ioliu.cn/bing/SwiftFox_ZH-CN9413097062_1920x1080.jpg')">
-              </div>
-            
             <div class="post-content">
-              <p>N1翻车,决定要把手上的n1性能榨干</p>
-<!-- more -->
-<ul>
-<li></li>
-</ul>
-<h1 id="bypy下载百度网盘内容到树莓派">bypy下载百度网盘内容到树莓派</h1>
-<p>nohup bypy downdir java &gt;/root/bypylog 2&gt;&amp;1 &amp;</p>
-<h1 id="frp服务器启动">frp服务器启动</h1>
-<p>nohup /root/frp/frp_0.21.0_linux_amd64/frps -c /root/frp/frp_0.21.0_linux_amd64/frps.ini &gt;/root/logs/frps 2&gt;&amp;1 &amp;</p>
-<h1 id="上传到od">上传到od</h1>
-<p>nohup /root/odupload.sh /mnt/usb/Pictures/ &gt;/root/log 2&gt;&amp;1 &amp;</p>
+              <p>使用酸酸乳开启代理，只支持浏览器开启代理，其他软件是不能够开启代理的，总结如下：<br>
+一：开启酸酸乳，打开自动代理模式，选择节点。　　<br>
+二：打开终端，用 vim 打开 .zshrc（zsh用户）或 .base_profile（bash用户）：</p>
+<pre><code>vim ~/.zshrc
+</code></pre>
+<p>最底行插入：</p>
+<pre><code>alias proxy='export all_proxy=socks5://127.0.0.1:1080' 
+alias unproxy='unset all_proxy'
+</code></pre>
+<p>:wq保存退出。</p>
+<pre><code>source ~/.zshrc
+</code></pre>
+<p>关闭代理：<br>
+<code>unproxy 或者关闭终端窗口.该设置只对当前终端窗口生效,重启终端失效</code></p>
 
             </div>
           </article>
         </div>
     
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="http://note.geekju.cn//post/mybatis-zhong-param-zhu-jie-de-si-chong-shi-yong-chang-jing">
+              <h3 class="post-title">
+                MyBatis 中 @Param 注解的四种使用场景
+              </h3>
+            </a>
+          </div>  
         
 
         

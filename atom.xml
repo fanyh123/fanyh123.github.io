@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://note.geekju.cn/</id>
     <title>GeekNotes</title>
-    <updated>2019-08-17T10:05:06.529Z</updated>
+    <updated>2019-08-27T08:09:51.389Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://note.geekju.cn/"/>
     <link rel="self" href="http://note.geekju.cn//atom.xml"/>
@@ -10,6 +10,28 @@
     <logo>http://note.geekju.cn//images/avatar.png</logo>
     <icon>http://note.geekju.cn//favicon.ico</icon>
     <rights>All rights reserved 2019, GeekNotes</rights>
+    <entry>
+        <title type="html"><![CDATA[Mac终端设置代理]]></title>
+        <id>http://note.geekju.cn//post/mac-zhong-duan-she-zhi-dai-li</id>
+        <link href="http://note.geekju.cn//post/mac-zhong-duan-she-zhi-dai-li">
+        </link>
+        <updated>2019-08-27T07:50:18.000Z</updated>
+        <content type="html"><![CDATA[<p>使用酸酸乳开启代理，只支持浏览器开启代理，其他软件是不能够开启代理的，总结如下：<br>
+一：开启酸酸乳，打开自动代理模式，选择节点。　　<br>
+二：打开终端，用 vim 打开 .zshrc（zsh用户）或 .base_profile（bash用户）：</p>
+<pre><code>vim ~/.zshrc
+</code></pre>
+<p>最底行插入：</p>
+<pre><code>alias proxy='export all_proxy=socks5://127.0.0.1:1080' 
+alias unproxy='unset all_proxy'
+</code></pre>
+<p>:wq保存退出。</p>
+<pre><code>source ~/.zshrc
+</code></pre>
+<p>关闭代理：<br>
+<code>unproxy 或者关闭终端窗口.该设置只对当前终端窗口生效,重启终端失效</code></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MyBatis 中 @Param 注解的四种使用场景]]></title>
         <id>http://note.geekju.cn//post/mybatis-zhong-param-zhu-jie-de-si-chong-shi-yong-chang-jing</id>
