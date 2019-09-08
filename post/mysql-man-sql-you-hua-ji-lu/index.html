@@ -1,0 +1,171 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>慢SQL优化技巧 | GeekNotes</title>
+<link rel="shortcut icon" href="http://note.geekju.cn//favicon.ico?v=1567926351861">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="http://note.geekju.cn//styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="http://note.geekju.cn/">
+  <img class="avatar" src="http://note.geekju.cn//images/avatar.png?v=1567926351861" alt="">
+  </a>
+  <h1 class="site-title">
+    GeekNotes
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              慢SQL优化技巧
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-05-22 ·
+              </time>
+              
+                <a href="http://note.geekju.cn//tag/MH8alIhJ5" class="post-tags">
+                  # Mybits
+                </a>
+              
+            </div>
+            
+              <div class="post-feature-image" style="background-image: url('http://h1.ioliu.cn/bing/AsburyParkNJ_ZH-CN1353073841_1920x1080.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <h1 id="查询慢日志">查询慢日志</h1>
+<pre><code>show variables like '%quer%'
+</code></pre>
+<p>如图:<br>
+slow_query_log:on/off 是否记录慢日志<br>
+slow_query_log_file: 慢日志目录<br>
+long_query_time: 慢日志触发时间,下图是1s<br>
+<img src="http://qiniu.geekju.cn/geekNotes/jpg/1567566046436.jpg" alt=""></p>
+<h1 id="查询优化神器-explain命令">查询优化神器 - explain命令</h1>
+<p>具体用法和字段含义可以参考官网<a href="https://dev.mysql.com/doc/refman/5.5/en/explain-output.html">explain-output</a>，rows是核心指标，绝大部分rows小的语句执行一定很快。所以优化语句基本上都是在优化rows。</p>
+<h1 id="慢查询优化基本步骤">慢查询优化基本步骤</h1>
+<p>0.先运行看看是否真的很慢，注意设置SQL_NO_CACHE<br>
+1.where条件单表查，锁定最小返回记录表。这句话的意思是把查询语句的where都应用到表中返回的记录数最小的表开始查起，单表每个字段分别查询，看哪个字段的区分度最高<br>
+2.explain查看执行计划，是否与1预期一致（从锁定记录较少的表开始查询）<br>
+3.order by limit 形式的sql语句让排序的表优先查<br>
+4.了解业务使用场景<br>
+5.加索引时参照建索引的几大原则<br>
+6.观察结果，不符合预期继续从0分析</p>
+<h1 id="建索引的几大原则">建索引的几大原则</h1>
+<p>1.最左前缀匹配原则，非常重要的原则，mysql会一直向右匹配直到遇到范围查询(&gt;、&lt;、between、like)就停止匹配，比如a = 1 and b = 2 and c &gt; 3 and d = 4 如果建立(a,b,c,d)顺序的索引，d是用不到索引的，如果建立(a,b,d,c)的索引则都可以用到，a,b,d的顺序可以任意调整。</p>
+<p>2.=和in可以乱序，比如a = 1 and b = 2 and c = 3 建立(a,b,c)索引可以任意顺序，mysql的查询优化器会帮你优化成索引可以识别的形式。</p>
+<p>3.尽量选择区分度高的列作为索引，区分度的公式是count(distinct col)/count(*)，表示字段不重复的比例，比例越大我们扫描的记录数越少，唯一键的区分度是1，而一些状态、性别字段可能在大数据面前区分度就是0，那可能有人会问，这个比例有什么经验值吗？使用场景不同，这个值也很难确定，一般需要join的字段我们都要求是0.1以上，即平均1条扫描10条记录。</p>
+<p>4.索引列不能参与计算，保持列“干净”，比如from_unixtime(create_time) = ’2019-05-29’就不能使用到索引，原因很简单，b+树中存的都是数据表中的字段值，但进行检索时，需要把所有元素都应用函数才能比较，显然成本太大。所以语句应该写成create_time = unix_timestamp(’2019-05-29’)。</p>
+<p>5.尽量的扩展索引，不要新建索引。比如表中已经有a的索引，现在要加(a,b)的索引，那么只需要修改原来的索引即可。</p>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="http://note.geekju.cn//post/mac-zhong-duan-she-zhi-dai-li">
+              <h3 class="post-title">
+                Mac终端设置代理
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '5b0e6deb001499367e1d',
+    clientSecret: '717dc9f810d8515abfaad5a8f9f0d3596e10f8de',
+    repo: 'fanyh123.github.io',
+    owner: 'fanyh123',
+    admin: ['fanyh123'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
