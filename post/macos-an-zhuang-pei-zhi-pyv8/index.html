@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MacOS 安装配置PyV8 | GeekNotes</title>
-<link rel="shortcut icon" href="http://note.geekju.cn//favicon.ico?v=1569312888054">
+<link rel="shortcut icon" href="http://note.geekju.cn//favicon.ico?v=1569333541792">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="http://note.geekju.cn//styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="http://note.geekju.cn/">
-  <img class="avatar" src="http://note.geekju.cn//images/avatar.png?v=1569312888054" alt="">
+  <img class="avatar" src="http://note.geekju.cn//images/avatar.png?v=1569333541792" alt="">
   </a>
   <h1 class="site-title">
     GeekNotes
@@ -89,7 +89,9 @@
               </div>
             
             <div class="post-content">
-              <p>pyv8是一个纯粹的非基于浏览器的JavaScript运行时环境.</p>
+              <p>pyv8是一个纯粹的非基于浏览器的JavaScript运行时环境.<br>
+Python3 安装不要使用pip，因为官方只支持 Python2，需要在这里下载对应系统的二进制文件：<a href="https://github.com/emmetio/pyv8-binaries/blob/master/">github.com/emmetio/pyv…</a><br>
+然后解压后将 PyV8.py 与 _PyV8.so (如so不是这个名字需要改成这样) 两文件复制到 Python 的 site-packages 目录下，如 /usr/local/lib/python3.6/site-packages 。</p>
 <h3 id="安装boost依赖">安装Boost依赖:</h3>
 <pre><code>brew install boost 
 
