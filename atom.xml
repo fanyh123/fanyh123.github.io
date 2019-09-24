@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://note.geekju.cn/</id>
     <title>GeekNotes</title>
-    <updated>2019-09-08T07:05:53.423Z</updated>
+    <updated>2019-09-24T08:12:17.576Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://note.geekju.cn/"/>
     <link rel="self" href="http://note.geekju.cn//atom.xml"/>
@@ -10,6 +10,64 @@
     <logo>http://note.geekju.cn//images/avatar.png</logo>
     <icon>http://note.geekju.cn//favicon.ico</icon>
     <rights>All rights reserved 2019, GeekNotes</rights>
+    <entry>
+        <title type="html"><![CDATA[MacOS 安装配置PyV8]]></title>
+        <id>http://note.geekju.cn//post/macos-an-zhuang-pei-zhi-pyv8</id>
+        <link href="http://note.geekju.cn//post/macos-an-zhuang-pei-zhi-pyv8">
+        </link>
+        <updated>2019-09-04T07:40:15.000Z</updated>
+        <content type="html"><![CDATA[<p>pyv8是一个纯粹的非基于浏览器的JavaScript运行时环境.</p>
+<h3 id="安装boost依赖">安装Boost依赖:</h3>
+<pre><code>brew install boost 
+
+brew install libboost-all-dev boost-python3 boost-build boost-mpi
+</code></pre>
+<h3 id="安装v8环境">安装V8环境:</h3>
+<pre><code>brew install v8
+</code></pre>
+<h3 id="安装pyv8">安装pyv8:</h3>
+<pre><code>pip install -e git://github.com/brokenseal/PyV8-OS-X#egg=pyv8
+</code></pre>
+<h3 id="代码示例">代码示例:</h3>
+<pre><code># -*- coding: utf-8 -*-
+
+from pyv8 import PyV8
+
+ctxt = PyV8.JSContext()
+ctxt.enter()
+
+# 函数
+func = ctxt.eval(&quot;&quot;&quot;
+    (function(){
+        function hello(){
+            return &quot;Hello world.&quot;;
+        }
+        return hello();
+    })
+&quot;&quot;&quot;)
+print func()
+# Hello world.
+
+# 变量
+ctxt.eval(&quot;&quot;&quot;
+    var_ex1 = 1;
+    var_ex2 = 1.0;
+    var_ex3 = &quot;test&quot;;
+    var_ex4 = true;
+    &quot;&quot;&quot;)
+
+vars = ctxt.locals
+print vars.var_ex1
+# 1
+
+# 传入参数
+ctxt.locals.test = 12
+print int(ctxt.eval(&quot;test&quot;))
+# 12
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MyBatis 中 @Param 注解的四种使用场景]]></title>
         <id>http://note.geekju.cn//post/mybatis-zhong-param-zhu-jie-de-si-chong-shi-yong-chang-jing</id>
@@ -301,7 +359,7 @@ fi
 34 IP地址：((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))
 </code></pre>
 <h1 id="正则附图">正则附图</h1>
-<p><img src="http://qiniu.geekju.cn/geekNotes/jpg/1512313400_3286.png" alt=""></p>
+<figure data-type="image" tabindex="1"><img src="http://qiniu.geekju.cn/geekNotes/jpg/1512313400_3286.png" alt=""></figure>
 <h1 id="应用">应用</h1>
 <h2 id="提取字符串中的字母和数字">提取字符串中的字母和数字</h2>
 <pre><code>String str = &quot;adsf    adS	DFASFSADF阿德斯防守对方asdfsadf37《？：？@%#￥%#￥%@#$%#@$%^&gt;&lt;?1234&quot;;
